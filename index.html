@@ -8,7 +8,6 @@
         :root {
             --bg: #050505;
             --accent: #007bff;
-            --accent-glow: rgba(0, 123, 255, 0.4);
             --card-bg: rgba(255, 255, 255, 0.03);
             --text: #e2e8f0;
         }
@@ -18,19 +17,14 @@
             background-color: var(--bg); color: var(--text); overflow-x: hidden; scroll-behavior: smooth;
         }
 
-        /* --- Sfondo Video --- */
+        /* --- BACKGROUND VIDEO --- */
         .video-background {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -4; background: #000;
         }
         .video-background video {
-            width: 100vw; height: 100vh; object-fit: cover;
+            width: 100%; height: 100%; object-fit: cover;
             filter: brightness(0.4);
-        }
-        .video-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(5,5,5,0.95) 100%);
-            z-index: -3;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
@@ -43,27 +37,23 @@
 
         /* Hero */
         .hero { text-align: center; padding: 100px 0; }
-        h1 { font-size: 64px; margin-bottom: 20px; line-height: 1.1; text-shadow: 0 0 20px var(--accent-glow); }
-        .highlight { 
-            background: linear-gradient(90deg, #007bff, #7000ff, #007bff);
-            background-size: 200% auto; animation: shine 3s linear infinite;
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-        }
-        @keyframes shine { to { background-position: 200% center; } }
+        h1 { font-size: 64px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(0,123,255,0.5); }
+        .highlight { background: linear-gradient(90deg, #007bff, #7000ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         /* Bottoni */
         .btn { padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: 0.3s; }
-        .btn-primary { background: var(--accent); color: white; border: none; box-shadow: 0 0 20px var(--accent-glow); }
-        
-        /* Features */
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 80px 0; }
+        .btn-primary { background: var(--accent); color: white; border: none; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
+
+        /* Features 3D (RIPRISTINATO) */
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 80px 0; perspective: 1000px; }
         .card { 
             background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; 
-            transition: 0.5s; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        .card:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 123, 255, 0.3); }
+        .card:hover { transform: rotateX(10deg) rotateY(10deg) translateY(-20px); border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 123, 255, 0.2); }
 
         /* Checkout Box */
+        .checkout-section { padding: 80px 0; }
         .checkout-box { 
             max-width: 500px; margin: 0 auto; text-align: center;
             background: rgba(0, 0, 0, 0.6); padding: 40px; border-radius: 24px; 
@@ -74,43 +64,43 @@
 </head>
 <body>
 
+    <!-- VIDEO BACKGROUND -->
     <div class="video-background">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline poster="https://via.placeholder.com/1920x1080/000/000">
             <source src="assets/zoom_compressed.mp4" type="video/mp4">
             <source src="https://pixabay.com/it/videos/download/video-100493_medium.mp4" type="video/mp4">
         </video>
     </div>
-    <div class="video-overlay"></div>
 
     <div class="container">
         <header>
             <div class="logo">
                 <img src="assets/logo.png" alt="Logo">OmniaStudio<span>PRO</span>
             </div>
-            <a href="#acquista" class="btn btn-primary">Attiva Licenza</a>
+            <a href="#acquista" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Attiva Licenza</a>
         </header>
 
         <section class="hero">
             <h1>L'Intelligenza Artificiale<br><span class="highlight">100% Privata e Offline.</span></h1>
-            <p class="subtitle" style="font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 50px auto;">Il primo assistente AI per Professionisti che gira interamente sul tuo PC. Nessun costo API, nessuna fuga di dati.</p>
-            <a href="#" class="btn btn-primary" style="animation: pulse-blue 2s infinite;">Scarica per Windows/Mac</a>
+            <p style="font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 50px auto;">Il primo assistente AI per Professionisti che gira interamente sul tuo PC. Nessun costo API, nessuna fuga di dati.</p>
+            <a href="#" class="btn btn-primary">Scarica per Windows/Mac</a>
         </section>
 
         <section class="features">
             <div class="card"><h3>🔒 Privacy Totale</h3><p>I tuoi dati non lasciano mai il tuo disco fisso.</p></div>
             <div class="card"><h3>⚡ Analisi PDF</h3><p>Digerisce contratti lunghi istantaneamente.</p></div>
             <div class="card"><h3>👁️ OCR Avanzato</h3><p>Trasforma foto e scansioni in testo ricercabile.</p></div>
-            <div class="card"><h3>🔍 Ricerca Semantica</h3><p>Trova risposte precise in migliaia di documenti in un istante.</p></div>
-            <div class="card"><h3>📝 Appunti Criptati</h3><p>Blocco note per ogni pratica, protetto e riservato.</p></div>
-            <div class="card"><h3>⏱️ Time Tracking</h3><p>Parcellazione automatica integrata per ogni pratica.</p></div>
+            <div class="card"><h3>🔍 Ricerca Semantica</h3><p>Trova risposte precise in migliaia di documenti.</p></div>
+            <div class="card"><h3>📝 Appunti Criptati</h3><p>Blocco note per ogni pratica, protetto.</p></div>
+            <div class="card"><h3>⏱️ Time Tracking</h3><p>Parcellazione automatica integrata.</p></div>
         </section>
 
-        <section id="acquista" class="checkout-section" style="padding-bottom: 80px;">
+        <section id="acquista" class="checkout-section">
             <div class="checkout-box">
                 <h2 style="margin-top:0;">Licenza Lifetime</h2>
                 <div style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">€ 297,00</div>
                 <input type="number" id="deviceCodeInput" class="checkout-input" placeholder="Codice Dispositivo" required>
-                <button onclick="pagaConStripe()" class="btn btn-primary" style="border-radius: 12px; cursor: pointer; font-size: 18px; padding: 18px;">
+                <button onclick="pagaConStripe()" class="btn-primary" style="border-radius: 12px; cursor: pointer; font-size: 18px; padding: 18px;">
                     💳 Acquista e Sblocca Ora
                 </button>
             </div>
@@ -124,10 +114,7 @@
     <script>
         function pagaConStripe() {
             const deviceCode = document.getElementById('deviceCodeInput').value;
-            if(!deviceCode || deviceCode.length < 5) {
-                alert("Inserisci un Codice Dispositivo valido!");
-                return;
-            }
+            if(!deviceCode) { alert("Inserisci il codice!"); return; }
             window.location.href = "https://buy.stripe.com/test_ILTUOLINKSTRIPE?client_reference_id=" + deviceCode;
         }
     </script>
