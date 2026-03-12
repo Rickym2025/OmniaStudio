@@ -6,7 +6,7 @@
     <title>OmniaStudio PRO | L'IA Privata per Professionisti</title>
     <style>
         :root {
-            --bg: #0b0f19;
+            --bg: #050505;
             --accent: #007bff;
             --accent-glow: rgba(0, 123, 255, 0.4);
             --card-bg: rgba(255, 255, 255, 0.03);
@@ -20,164 +20,114 @@
             background-color: var(--bg); color: var(--text); overflow-x: hidden; scroll-behavior: smooth;
         }
 
-        /* Effetti Glow Sfondo (Morph) */
-        .glow-orb {
-            position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            border-radius: 50%; filter: blur(80px); z-index: -1; animation: float 10s infinite alternate ease-in-out;
+        /* Effetto Griglia 3D */
+        .grid-3d {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0, 123, 255, 0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 123, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(800px) rotateX(60deg);
+            z-index: -2;
         }
-        .orb-1 { top: -200px; left: -200px; }
-        .orb-2 { bottom: 10%; right: -200px; background: radial-gradient(circle, rgba(111, 66, 193, 0.3) 0%, transparent 70%); animation-delay: -5s; }
-
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Navbar */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 30px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: 1px; }
-        .logo span { color: var(--accent); text-shadow: 0 0 15px var(--accent-glow); }
 
-        /* Hero Section */
-        .hero { text-align: center; padding: 100px 0; position: relative; }
-        h1 { font-size: 56px; margin-bottom: 20px; line-height: 1.1; }
-        .highlight { background: linear-gradient(90deg, #007bff, #00ffcc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 50px auto; line-height: 1.6; }
+        /* Navbar */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 30px 0; }
+        .logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: 1px; }
+        .logo span { color: var(--accent); }
+
+        /* Hero */
+        .hero { text-align: center; padding: 100px 0; }
+        h1 { font-size: 64px; margin-bottom: 20px; line-height: 1.1; }
+        .highlight { 
+            background: linear-gradient(90deg, #007bff, #7000ff, #007bff);
+            background-size: 200% auto; animation: shine 3s linear infinite;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+        .subtitle { font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 50px auto; }
 
         /* Bottoni */
-        .btn-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .btn {
-            padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 12px;
-            cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 10px;
-            transition: all 0.3s ease; position: relative; overflow: hidden;
-        }
-        .btn-primary { background: var(--accent); color: white; border: none; box-shadow: 0 0 20px var(--accent-glow); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 40px var(--accent-glow); }
-        .btn-secondary { background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
-
-        /* Glass Cards (Features) */
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 80px 0; }
+        .btn-group { display: flex; justify-content: center; gap: 20px; }
+        .btn { padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: all 0.3s ease; }
+        .btn-primary { background: var(--accent); color: white; border: none; box-shadow: 0 0 20px var(--accent-glow); animation: pulse-blue 2s infinite; }
+        @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 123, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); } }
+        
+        /* Features 3D */
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 80px 0; perspective: 1000px; }
         .card {
-            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px;
-            padding: 40px; backdrop-filter: blur(16px); transition: transform 0.3s, border-color 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px;
+            backdrop-filter: blur(16px); transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        .card:hover { transform: translateY(-10px); border-color: rgba(0, 123, 255, 0.3); }
-        .card-icon { font-size: 40px; margin-bottom: 20px; display: inline-block; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 15px; }
-        .card h3 { font-size: 22px; margin-bottom: 15px; color: white; }
-        .card p { color: #94a3b8; line-height: 1.6; }
+        .card:hover { transform: rotateX(10deg) rotateY(10deg) translateY(-20px); border-color: var(--accent); }
+        .card-icon { font-size: 40px; margin-bottom: 20px; }
 
-        /* Sezione Acquisto */
+        /* Process Steps */
+        .step-container { display: flex; justify-content: space-between; gap: 20px; padding: 50px 0; }
+        .step { flex: 1; text-align: center; padding: 20px; }
+
+        /* Checkout */
         .checkout-section { background: rgba(0,0,0,0.4); padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
-        .checkout-box { max-width: 500px; margin: 0 auto; background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid rgba(0, 123, 255, 0.3); box-shadow: 0 0 40px rgba(0,123,255,0.1); backdrop-filter: blur(20px); }
-        .price { font-size: 48px; font-weight: bold; color: white; margin: 20px 0; }
-        .price span { font-size: 18px; color: #94a3b8; font-weight: normal; }
-        .checkout-input { width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; font-size: 18px; text-align: center; margin-bottom: 20px; box-sizing: border-box; outline: none; transition: border 0.3s; }
-        .checkout-input:focus { border-color: var(--accent); }
-
-        footer { text-align: center; padding: 40px 0; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+        .checkout-box { max-width: 500px; margin: 0 auto; background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid rgba(0, 123, 255, 0.3); }
+        .checkout-input { width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; margin-bottom: 20px; box-sizing: border-box; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
+    <div class="grid-3d"></div>
 
     <div class="container">
         <header>
             <div class="logo">OmniaStudio<span>PRO</span></div>
-            <a href="#acquista" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Attiva Licenza</a>
+            <a href="#acquista" class="btn" style="background:transparent; border:1px solid #fff;">Attiva Licenza</a>
         </header>
 
         <section class="hero">
             <h1>L'Intelligenza Artificiale<br><span class="highlight">100% Privata e Offline.</span></h1>
-            <p class="subtitle">Il primo assistente AI per Avvocati e Commercialisti che gira interamente sul tuo PC. Nessun costo mensile API, nessuna fuga di dati. Lettura PDF, OCR e analisi contratti alla velocità della luce.</p>
-            
+            <p class="subtitle">Il primo assistente AI per Professionisti che gira interamente sul tuo PC. Nessun costo API, nessuna fuga di dati.</p>
             <div class="btn-group">
-                <a href="URL_DEL_TUO_ZIP_WINDOWS" class="btn btn-primary">
-                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M6.555 1.375 0 2.237v5.45h6.555zM0 13.795l6.555.933V8.313H0zm7.278-5.4.026 6.378L16 16V8.395zM16 0 7.33 1.244v6.414H16z"/></svg>
-                    Download per Windows
-                </a>
-                <a href="URL_DEL_TUO_ZIP_MAC" class="btn btn-secondary">
-                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516s1.52.087 2.475-1.258.762-2.391.728-2.43zm3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422s1.675-2.789 1.698-2.854-.597-.79-1.254-1.157a3.692 3.692 0 0 0-1.563-.434c-1.082-.031-2.242.705-2.766.705-.523 0-1.465-.67-2.353-.67-.936.03-1.879.35-2.585.962C1.042 5.564.01 7.42 1.096 9.873c.531 1.21 1.353 2.65 2.521 2.65.65 0 1.002-.381 1.838-.381.82 0 1.139.381 1.838.381 1.173 0 1.896-1.33 2.443-2.43.518-.948.74-1.896.763-1.954z"/></svg>
-                    Download per Mac (M1/M2)
-                </a>
+                <a href="#" class="btn btn-primary">Scarica per Windows</a>
+                <a href="#" class="btn" style="background:rgba(255,255,255,0.05);">Scarica per Mac</a>
             </div>
-            <p style="margin-top: 20px; font-size: 14px; color: #64748b;">Include 10 Messaggi di Prova Gratuita.</p>
+            <p style="margin-top: 20px; font-size: 14px; color: #64748b;">✅ Privacy Certificata | ✅ Offline First | ✅ AES-256</p>
         </section>
 
+        <!-- Come Funziona -->
+        <section class="step-container">
+            <div class="step"><h3>1. Installa</h3><p>Scarica ed esegui. Non richiede configurazioni.</p></div>
+            <div class="step"><h3>2. Carica</h3><p>Trascina i tuoi PDF o documenti nell'area sicura.</p></div>
+            <div class="step"><h3>3. Analizza</h3><p>Ottieni risposte, riassunti ed analisi legali in tempo reale.</p></div>
+        </section>
+
+        <!-- Funzioni -->
         <section class="features">
-            <div class="card">
-                <div class="card-icon" style="color: var(--green);">🔒</div>
-                <h3>Segreto Professionale</h3>
-                <p>Nessun dato viene inviato su server esterni. Elaborazione locale con modello Qwen 2.7B e crittografia militare AES-256 su disco.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon" style="color: var(--accent);">⚡</div>
-                <h3>Lettura Maxi-Documenti</h3>
-                <p>Grazie all'architettura a 32.000 token, OmniaStudio digerisce contratti da 40 pagine in pochi secondi, evidenziando scadenze e rischi.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon" style="color: var(--purple);">👁️</div>
-                <h3>Occhio Bionico (OCR)</h3>
-                <p>Hai solo una fotografia o un PDF scansionato? Nessun problema. Il motore OCR integrato estrae il testo offline in autonomia.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🛠️</div>
-                <h3>Strumenti Integrati</h3>
-                <p>Spazio di lavoro con blocco note auto-salvante per pratica, lettore PDF puro, calcolatrice elastica e timer per le tue parcelle.</p>
+            <div class="card"><div class="card-icon">🔒</div><h3>Privacy Totale</h3><p>I tuoi dati non lasciano mai il tuo disco fisso.</p></div>
+            <div class="card"><div class="card-icon">⚡</div><h3>Analisi PDF</h3><p>Digerisce contratti lunghi istantaneamente.</p></div>
+            <div class="card"><div class="card-icon">👁️</div><h3>OCR Avanzato</h3><p>Trasforma foto e scansioni in testo ricercabile.</p></div>
+            <div class="card"><div class="card-icon">📝</div><h3>Appunti Criptati</h3><p>Blocco note per ogni pratica, protetto.</p></div>
+            <div class="card"><div class="card-icon">🧮</div><h3>Calcolatrice</h3><p>Strumenti contabili a portata di click.</p></div>
+            <div class="card"><div class="card-icon">⏱️</div><h3>Time Tracking</h3><p>Parcellazione automatica integrata.</p></div>
+        </section>
+
+        <section id="acquista" class="checkout-section">
+            <div class="checkout-box">
+                <div class="price" style="font-size: 32px;">Licenza Lifetime: € 297</div>
+                <input type="number" id="deviceCodeInput" class="checkout-input" placeholder="Inserisci Codice Dispositivo" required>
+                <button onclick="pagaConStripe()" class="btn btn-primary" style="width: 100%; justify-content: center;">💳 Acquista e Sblocca</button>
             </div>
         </section>
     </div>
 
-    <!-- SEZIONE CHECKOUT / GENERAZIONE CODICE -->
-    <section id="acquista" class="checkout-section">
-        <div class="container">
-            <h2>Pronto a lavorare senza limiti?</h2>
-            <p class="subtitle" style="margin-bottom: 40px;">Acquista la licenza a vita. Nessun abbonamento, nessun costo nascosto API.</p>
-            
-            <div class="checkout-box">
-                <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 12px; color: var(--accent); font-weight: bold;">Licenza Lifetime (Singolo PC)</div>
-                <div class="price">€ 297<span>,00 una tantum</span></div>
-                
-                <p style="font-size: 14px; color: #94a3b8; margin-bottom: 20px; text-align: left;">
-                    <b>1.</b> Apri OmniaStudio sul tuo PC.<br>
-                    <b>2.</b> Copia il "Codice Dispositivo" mostrato a schermo.<br>
-                    <b>3.</b> Inseriscilo qui sotto e procedi al pagamento sicuro.
-                </p>
-
-                <!-- IL FORM PER STRIPE -->
-                <input type="number" id="deviceCodeInput" class="checkout-input" placeholder="Es. 123456" required>
-                
-                <!-- Questo bottone chiamerà Stripe Payment Links -->
-                <button onclick="pagaConStripe()" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 18px; padding: 18px;">
-                    💳 Acquista e Sblocca Ora
-                </button>
-                <p style="margin-top: 15px; font-size: 12px; color: #64748b;">Riceverai il Codice di Sblocco via Email istantaneamente dopo il pagamento.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 OmniaStudio PRO. Tutti i diritti riservati.<br>Assistenza: modena.riccardo@gmail.com</p>
+    <footer style="text-align: center; padding: 50px;">
+        <p>&copy; 2024 OmniaStudio PRO | Contatti: modena.riccardo@gmail.com</p>
     </footer>
 
     <script>
-        // SCRIPT COLLEGAMENTO A STRIPE PAYMENT LINKS
         function pagaConStripe() {
             const deviceCode = document.getElementById('deviceCodeInput').value;
-            if(!deviceCode || deviceCode.length < 5) {
-                alert("Per favore, inserisci un Codice Dispositivo valido generato dall'app.");
-                return;
-            }
-
-            // 1. Crea un "Payment Link" su Stripe (dal tuo pannello Stripe).
-            // 2. Stripe permette di passare dati extra nell'URL usando "client_reference_id" o "prefilled_email"
-            // Sostituisci questo URL con il tuo Payment Link Reale di Stripe!
-            const stripeUrl = "https://buy.stripe.com/test_ILTUOLINKSTRIPE";
-            
-            // Reindirizziamo l'utente alla cassa di Stripe, passandogli il codice dispositivo in modo che n8n lo possa leggere dopo!
-            window.location.href = stripeUrl + "?client_reference_id=" + deviceCode;
+            if(!deviceCode) { alert("Inserisci il codice!"); return; }
+            window.location.href = "https://buy.stripe.com/test_ILTUOLINKSTRIPE?client_reference_id=" + deviceCode;
         }
     </script>
 </body>
