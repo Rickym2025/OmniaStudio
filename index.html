@@ -12,109 +12,156 @@
             --text: #e2e8f0;
         }
 
+        /* Reset e Base */
         body, html {
             margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: var(--bg); color: var(--text); overflow-x: hidden; scroll-behavior: smooth;
+            color: var(--text); overflow-x: hidden; scroll-behavior: smooth;
+            background-color: var(--bg); /* Colore base fallback */
         }
 
-        /* --- BACKGROUND VIDEO (Stile Fisso) --- */
-        .video-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -5; background: #000;
+        /* --- BACKGROUND VIDEO (Problema Risolto) --- */
+        .video-layer {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 1; /* Portato sopra lo sfondo del body */
+            background-color: #000;
         }
-        video {
+        .video-layer video {
             width: 100%; height: 100%; object-fit: cover;
-            filter: brightness(0.4);
+            opacity: 0.35; /* Usa opacity invece di filter per compatibilità assoluta */
+        }
+        
+        /* Contenitore principale (sopra il video) */
+        .content-layer {
+            position: relative;
+            z-index: 10; /* Questo assicura che il testo sia sopra al video */
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
+        /* Navbar */
         header { display: flex; justify-content: space-between; align-items: center; padding: 30px 0; }
         .logo { font-size: 24px; font-weight: 800; color: white; display: flex; align-items: center; }
         .logo img { height: 45px; margin-right: 15px; }
         .logo span { color: var(--accent); }
 
+        /* Hero e GLOW RIPRISTINATO */
+        .hero { text-align: center; padding: 120px 0; }
+        h1 { 
+            font-size: 64px; margin-bottom: 20px; line-height: 1.2;
+            /* Glow su tutto il titolo */
+            text-shadow: 0 0 30px rgba(0, 123, 255, 0.6); 
+        }
+        .highlight { 
+            background: linear-gradient(90deg, #007bff, #00ffcc, #007bff);
+            background-size: 200% auto; animation: shine 3s linear infinite;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            /* Glow specifico per il testo colorato */
+            filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.8));
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+        
+        /* Bottoni */
         .btn { padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: 0.3s; }
         .btn-primary { background: var(--accent); color: white; border: none; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0,123,255,0.7); }
 
         /* Features 3D */
         .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 80px 0; perspective: 1000px; }
         .card { 
             background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; 
             transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(10px);
         }
-        .card:hover { transform: rotateX(10deg) rotateY(10deg) translateY(-20px); border-color: var(--accent); box-shadow: 0 0 30px rgba(0, 123, 255, 0.2); }
+        .card:hover { transform: rotateX(10deg) rotateY(10deg) translateY(-15px); border-color: var(--accent); box-shadow: 0 10px 40px rgba(0, 123, 255, 0.2); }
 
         /* Checkout Box Pulito */
         .checkout-box { 
             max-width: 500px; margin: 40px auto; text-align: center;
             background: rgba(0, 0, 0, 0.6); padding: 40px; border-radius: 24px; 
-            border: 1px solid var(--accent);
+            border: 1px solid var(--accent); backdrop-filter: blur(15px);
         }
-        /* Rimosso type="number" per eliminare le freccette */
         .checkout-input { 
             width: 100%; padding: 15px; background: rgba(255,255,255,0.05); 
             border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; 
-            margin-bottom: 20px; text-align: center; font-size: 16px; box-sizing: border-box;
+            margin-bottom: 20px; text-align: center; font-size: 16px; box-sizing: border-box; outline: none; transition: 0.3s;
         }
+        .checkout-input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0,123,255,0.3); }
     </style>
 </head>
 <body>
 
-    <!-- VIDEO BACKGROUND -->
-    <div class="video-container">
+    <!-- LAYER DEL VIDEO (Ora garantito visibile) -->
+    <div class="video-layer">
         <video autoplay muted loop playsinline>
             <source src="assets/zoom_compressed.mp4" type="video/mp4">
-            <source src="https://pixabay.com/it/videos/download/video-100493_medium.mp4" type="video/mp4">
+            <source src="https://cdn.pixabay.com/video/2021/08/04/83864-584752672_large.mp4" type="video/mp4">
         </video>
     </div>
 
-    <div class="container">
-        <header>
-            <div class="logo">
-                <img src="assets/logo.png" alt="Logo">OmniaStudio<span>PRO</span>
-            </div>
-            <a href="#acquista" class="btn btn-primary" style="padding: 10px 20px;">Attiva Licenza</a>
-        </header>
+    <!-- LAYER DEL CONTENUTO -->
+    <div class="content-layer">
+        <div class="container">
+            <header>
+                <div class="logo">
+                    <img src="assets/logo.png" alt="Logo">OmniaStudio<span>PRO</span>
+                </div>
+                <a href="#acquista" class="btn btn-primary" style="padding: 10px 20px;">Attiva Licenza</a>
+            </header>
 
-        <section style="text-align: center; padding: 100px 0;">
-            <h1 style="font-size: 64px; margin-bottom: 20px;">L'Intelligenza Artificiale<br><span style="background: linear-gradient(90deg, #007bff, #7000ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">100% Privata e Offline.</span></h1>
-            <p style="font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 50px auto;">Il primo assistente AI per Professionisti che gira interamente sul tuo PC.</p>
-            <a href="#" class="btn btn-primary">Scarica per Windows/Mac</a>
-        </section>
+            <section class="hero">
+                <h1>L'Intelligenza Artificiale<br><span class="highlight">100% Privata e Offline.</span></h1>
+                <p style="font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 50px auto;">Il primo assistente AI per Professionisti che gira interamente sul tuo PC. Nessun abbonamento, nessuna fuga di dati.</p>
+                <a href="#acquista" class="btn btn-primary">Scarica per Windows/Mac</a>
+            </section>
 
-        <section class="features">
-            <div class="card"><h3>🔒 Privacy Totale</h3><p>I tuoi dati non lasciano mai il tuo disco fisso.</p></div>
-            <div class="card"><h3>⚡ Analisi PDF</h3><p>Digerisce contratti lunghi istantaneamente.</p></div>
-            <div class="card"><h3>👁️ OCR Avanzato</h3><p>Trasforma foto e scansioni in testo ricercabile.</p></div>
-            <div class="card"><h3>🔍 Ricerca Semantica</h3><p>Trova risposte precise in migliaia di documenti.</p></div>
-            <div class="card"><h3>📝 Appunti Criptati</h3><p>Blocco note per ogni pratica, protetto.</p></div>
-            <div class="card"><h3>⏱️ Time Tracking</h3><p>Parcellazione automatica integrata.</p></div>
-        </section>
+            <section class="features">
+                <div class="card"><h3>🔒 Privacy Totale</h3><p>I tuoi dati non lasciano mai il tuo disco fisso.</p></div>
+                <div class="card"><h3>⚡ Analisi PDF</h3><p>Digerisce contratti lunghi istantaneamente.</p></div>
+                <div class="card"><h3>👁️ OCR Avanzato</h3><p>Trasforma foto e scansioni in testo ricercabile.</p></div>
+                <div class="card"><h3>🔍 Ricerca Semantica</h3><p>Trova risposte precise in migliaia di documenti.</p></div>
+                <div class="card"><h3>📝 Appunti Criptati</h3><p>Blocco note per ogni pratica, protetto.</p></div>
+                <div class="card"><h3>⏱️ Time Tracking</h3><p>Parcellazione automatica integrata.</p></div>
+            </section>
 
-        <section id="acquista" class="checkout-box">
-            <h2 style="margin-top:0;">Licenza Lifetime</h2>
-            <div style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">€ 297,00</div>
-            <!-- Input text senza freccette -->
-            <input type="text" id="deviceCodeInput" class="checkout-input" placeholder="Inserisci Codice Dispositivo" required>
-            <button onclick="pagaConStripe()" class="btn-primary" style="width: 100%; border-radius: 12px; cursor: pointer; font-size: 18px; padding: 18px;">
-                💳 Acquista e Sblocca Ora
-            </button>
-        </section>
+            <section id="acquista" style="padding: 60px 0;">
+                <div class="checkout-box">
+                    <h2 style="margin-top:0;">Licenza Lifetime</h2>
+                    <div style="font-size: 32px; font-weight: bold; margin-bottom: 20px;">€ 297,00</div>
+                    <input type="text" id="deviceCodeInput" class="checkout-input" placeholder="Inserisci il tuo Codice Dispositivo" required>
+                    <button onclick="pagaConStripe()" class="btn-primary" style="width: 100%; border-radius: 12px; cursor: pointer; font-size: 18px; padding: 18px;">
+                        💳 Acquista e Sblocca Ora
+                    </button>
+                    <p style="margin-top: 15px; font-size: 13px; color: #94a3b8;">Riceverai il Codice di Sblocco via Email subito dopo il pagamento.</p>
+                </div>
+            </section>
+        </div>
+
+        <footer style="text-align: center; padding: 50px; color: #64748b; border-top: 1px solid rgba(255,255,255,0.05);">
+            <p>&copy; 2026 OmniaStudio PRO | Assistenza: modena.riccardo@gmail.com</p>
+        </footer>
     </div>
 
-    <footer style="text-align: center; padding: 50px; color: #64748b;">
-        <p>&copy; 2026 OmniaStudio PRO | Assistenza: modena.riccardo@gmail.com</p>
-    </footer>
-
+    <!-- SCRIPT DI PAGAMENTO -->
     <script>
         function pagaConStripe() {
             const deviceCode = document.getElementById('deviceCodeInput').value;
+            
             if(!deviceCode || deviceCode.length < 5) {
-                alert("Inserisci un Codice Dispositivo valido!");
+                alert("Per favore, inserisci un Codice Dispositivo valido generato dal software.");
                 return;
             }
-            window.location.href = "https://buy.stripe.com/test_ILTUOLINKSTRIPE?client_reference_id=" + deviceCode;
+
+            // ==========================================
+            // ISTRUZIONI STRIPE:
+            // 1. Vai su Stripe -> Catalogo Prodotti
+            // 2. Apri il prodotto "Licenza OmniaStudio" (price_1TATraL64OGsXVEfpfBpYIpd)
+            // 3. Clicca su "Crea link di pagamento"
+            // 4. Copia l'URL che Stripe ti genera e incollalo qui sotto:
+            // ==========================================
+            const stripePaymentLinkURL = "https://buy.stripe.com/7sY3cw0wKebc3pEcRBdwc00"; 
+            
+            // Reindirizza aggiungendo il codice dispositivo in modo da riceverlo su Stripe/n8n
+            window.location.href = stripePaymentLinkURL + "?client_reference_id=" + encodeURIComponent(deviceCode);
         }
     </script>
 </body>
