@@ -151,18 +151,16 @@
                 return;
             }
 
-            // ==========================================
-            // ISTRUZIONI STRIPE:
-            // 1. Vai su Stripe -> Catalogo Prodotti
-            // 2. Apri il prodotto "Licenza OmniaStudio" (price_1TATraL64OGsXVEfpfBpYIpd)
-            // 3. Clicca su "Crea link di pagamento"
-            // 4. Copia l'URL che Stripe ti genera e incollalo qui sotto:
-            // ==========================================
             const stripePaymentLinkURL = "https://buy.stripe.com/7sY3cw0wKebc3pEcRBdwc00"; 
             
             // Reindirizza aggiungendo il codice dispositivo in modo da riceverlo su Stripe/n8n
             window.location.href = stripePaymentLinkURL + "?client_reference_id=" + encodeURIComponent(deviceCode);
         }
     </script>
+<!-- Vercel Speed Insights -->
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq ||[]).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
