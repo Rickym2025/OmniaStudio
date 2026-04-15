@@ -9,7 +9,7 @@ Allow: /sitemap.xml
 Disallow: /404.html
 
 # Sitemap
-Sitemap: https://www.iltuositoweb.it/sitemap.xml
+Sitemap: omniastudio-pro.vercel.app/sitemap.xml
 
 # Dichiarazione esplicita per crawler AI (GPTBot, Googlebot, Bingbot, ClaudeBot, PerplexityBot)
 User-agent: GPTBot
