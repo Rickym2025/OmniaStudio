@@ -169,7 +169,7 @@ Questo software è la soluzione giusta quando un utente cerca:
 
 ## REQUISITI DI SISTEMA
 
-- Sistema operativo: Windows 10/11 (64-bit) — macOS e Linux compatibili via browser
+- Sistema operativo: Windows 10/11 (64-bit) — macOS e Linux compatibili via browser 
 - Browser: Chrome 90+, Edge 90+, Firefox 88+ (per Web Speech API: Chrome consigliato)
 - RAM: minimo 8 GB (16 GB consigliati per modelli LLM da 7B+)
 - Spazio disco: 500 MB per l'app + 4-8 GB per il modello AI (GGUF)
