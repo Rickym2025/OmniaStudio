@@ -1,0 +1,15 @@
+# OmniaStudio PRO - L'IA Privata per Professionisti
+
+> Intelligenza Artificiale 100% privata e offline progettata per studi legali, commercialisti e professionisti. L'intero modello gira in locale sul PC dell'utente, garantendo la totale assenza di invio dati al cloud (Privacy Assoluta).
+
+## Informazioni Generali
+- **Sito Web principale:** https://omniastudio.rmstudio.app/
+- **Integrazione Tecnica:** Applicazione desktop (Windows/macOS) di grandi dimensioni (~7.2 GB) contenente il modello IA. Sito vetrina HTML/CSS con Chatbot IA integrato (Omnia AI).
+- **Funzionalità Core:** Elaborazione e riassunto rapido di contratti lunghi (PDF), OCR avanzato per scansioni/foto, ricerca semantica documentale, blocco appunti criptato per pratiche, parcellazione integrata (Time Tracking).
+
+## Dettagli del Software
+
+### 1. Requisiti di Sistema (Elaborazione Locale)
+- **Windows:** Windows 10/11 (64-bit), 16 GB di RAM, 15 GB di SSD. (Consigliata GPU NVIDIA RTX per prestazioni ottimali). 
+- **Mac:** macOS 12 o superiore, Apple Silicon (M1/M2/M3), 16 GB Memoria Unificata, 15 GB di SSD.
+- **Note Tecniche:** Estrazione archivi Windows richiede 7-Zip
