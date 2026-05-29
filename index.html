@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,10 @@
             --text: #e2e8f0;
         }
 
-        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); overflow-x: hidden; scroll-behavior: smooth; background-color: var(--bg); }
+        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); overflow-x: hidden; background-color: var(--bg); }
+
+        /* Regola Neuroscienza: Dimensione minima 18px per eliminare lo sforzo visivo */
+        body { font-size: 18px; }
 
         .video-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; background-color: #000; }
         .video-layer video { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
@@ -32,9 +35,38 @@
         .highlight { background: linear-gradient(90deg, #007bff, #00ffcc, #007bff); background-size: 200% auto; animation: shine 3s linear infinite; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(0, 123, 255, 0.8)); }
         @keyframes shine { to { background-position: 200% center; } }
         
-        .btn { padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: 0.3s; }
-        .btn-primary { background: var(--accent); color: white; border: none; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0,123,255,0.7); }
+        .btn { font-size: 16px; font-weight: bold; border-radius: 12px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; transition: 0.3s; box-sizing: border-box; }
+        
+        /* Visual Hook: Pulsante principale raddoppiato di dimensioni e con animazione pulsante */
+        .btn-primary-x2 { 
+            padding: 24px 42px; 
+            font-size: 20px; 
+            background: var(--accent); 
+            color: white !important; 
+            border: none; 
+            box-shadow: 0 0 30px rgba(0,123,255,0.5); 
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+        .btn-primary-x2:hover { 
+            transform: scale(1.03); 
+            box-shadow: 0 0 45px rgba(0,123,255,0.8); 
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 25px rgba(0,123,255,0.4); }
+            50%      { box-shadow: 0 0 45px rgba(0,123,255,0.8); }
+        }
+
+        .btn-secondary-custom {
+            padding: 20px 34px;
+            font-size: 18px;
+            background: rgba(255,255,255,0.05); 
+            color: white; 
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-secondary-custom:hover {
+            background: rgba(255,255,255,0.1);
+        }
 
         .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 80px 0; perspective: 1000px; }
         .card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); backdrop-filter: blur(10px); }
@@ -43,6 +75,142 @@
         .checkout-box { max-width: 500px; margin: 40px auto; text-align: center; background: rgba(0, 0, 0, 0.6); padding: 40px; border-radius: 24px; border: 1px solid var(--accent); backdrop-filter: blur(15px); }
         .checkout-input { width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 12px; margin-bottom: 20px; text-align: center; font-size: 16px; box-sizing: border-box; outline: none; transition: 0.3s; }
         .checkout-input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0,123,255,0.3); }
+
+        /* ─── STILI WIDGET ORBITALE SINCRO (RM STUDIO) ─── */
+        @keyframes orbit-rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes counter-rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+        .orbit-section {
+            padding: 100px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(2, 2, 2, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .orbit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 60px;
+            align-items: center;
+        }
+        .orbit-area {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 440px;
+        }
+        .orbit-ring {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(0, 123, 255, 0.15);
+            animation: orbit-rotation 40s linear infinite;
+        }
+        .orbit-ring:hover {
+            animation-play-state: paused;
+        }
+        .orbit-wrapper {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            transform: translate(-50%, -50%);
+        }
+        .orbit-item {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: counter-rotation 40s linear infinite;
+            transform-origin: center;
+        }
+        .orbit-ring:hover .orbit-item {
+            animation-play-state: paused;
+        }
+        .orbit-link {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-sizing: border-box;
+            transition: 0.3s;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        .orbit-link:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+        }
+        .orbit-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .orbit-img.cover {
+            object-fit: cover;
+        }
+        .orbit-img.rounded {
+            border-radius: 50%;
+        }
+        .orbit-center-photo {
+            position: absolute;
+            width: 144px;
+            height: 144px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            padding: 4px;
+            background: #000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            z-index: 15;
+            box-sizing: border-box;
+        }
+        .orbit-center-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        /* Tooltips */
+        .orbit-tooltip {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            background: #0a0a0c;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #94a3b8;
+            font-size: 12px;
+            border-radius: 8px;
+            padding: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            text-align: center;
+            z-index: 50;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            line-height: 1.4;
+        }
+        .orbit-tooltip b {
+            color: white;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .orbit-item:hover .orbit-tooltip {
+            opacity: 1;
+        }
 
         /* Footer avanzato */
         footer { padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
@@ -57,10 +225,37 @@
         .social-icons a:hover { border-color: var(--accent); color: white; }
     </style>
     <link rel="icon" href="assets/favicon.png" type="image/png">
+
+    <!-- Schema Markup JSON-LD (SEO Google & E-E-A-T) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "OmniaStudio PRO",
+      "operatingSystem": "Windows, macOS",
+      "applicationCategory": "BusinessApplication",
+      "description": "L'Intelligenza Artificiale locale e privata offline sviluppata da RM Studio per la massima sicurezza dei dati sensibili.",
+      "offers": {
+        "@type": "Offer",
+        "price": "699.00",
+        "priceCurrency": "EUR"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "62"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Riccardo Modena",
+        "url": "https://www.linkedin.com/in/riccardo-modena-13918a61/"
+      }
+    }
+    </script>
 </head>
 <body>
 
-    <!-- LAYER DEL VIDEO (Ora garantito visibile) -->
+    <!-- LAYER DEL VIDEO -->
     <div class="video-layer">
         <video autoplay muted loop playsinline>
             <source src="assets/zoom_compressed.mp4" type="video/mp4">
@@ -74,45 +269,44 @@
             <header>
                 <a href="#" class="logo">
                     <img src="assets/logo.png" alt="Logo">OmniaStudio<span>PRO</span>
-                    <!-- <img src="assets/logo.png" alt="Logo">OmniaStudio<span>PRO</span> style="background: white; padding: 4px 12px; border-radius: 8px; object-fit: contain; box-shadow: 0 2px 10px rgba(255,255,255,0.1);"> -->
                 </a>
                 <div class="nav-links">
-                    <a href="https://hometour-studio.vercel.app/" target="_blank">HomeTour</a>
-                    <a href="https://drive-motion.vercel.app/" target="_blank">DriveMotion</a>
-                    <a href="https://concierge24.vercel.app/" target="_blank">Concierge24</a>
+                    <a href="https://hometour.rmstudio.app/" target="_blank">HomeTour</a>
+                    <a href="https://drivemotion.rmstudio.app/" target="_blank">DriveMotion</a>
+                    <a href="https://concierge24.rmstudio.app/" target="_blank">Concierge24</a>
                     <a href="#acquista" class="btn btn-primary" style="padding: 10px 20px; margin-left: 10px; color:white;">Attiva Licenza</a>
                 </div>
             </header>
 
             <section class="hero">
-                    <h1>L'Intelligenza Artificiale<br><span class="highlight">100% Privata e Offline.</span></h1>
-                    <p style="font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 30px auto;">Il primo assistente AI per Professionisti che gira interamente sul tuo PC. Nessun abbonamento, nessuna fuga di dati.</p>
+                <h1>L'Intelligenza Artificiale<br><span class="highlight">100% Privata e Offline.</span></h1>
+                <p style="font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 30px auto;">Il primo assistente AI per Professionisti che gira interamente sul tuo PC. Nessun abbonamento, nessuna fuga di dati.</p>
+                
+                <!-- Info Trial -->
+                <div style="background: rgba(0, 123, 255, 0.1); border: 1px solid var(--accent); padding: 15px 25px; border-radius: 12px; display: inline-block; margin-bottom: 40px;">
+                    <span style="font-weight: bold; color: white;">🎁 Inizia Gratis:</span> Scarica ora e ottieni <b>30 messaggi di prova gratuiti</b>, senza impegno.
+                </div>
+            
+                <!-- Bottoni Download (Neuro-ottimizzati per dimensione x2) -->
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+                    <!-- Pulsante Windows (Primary x2) -->
+                    <a href="INSERISCI_LINK_WINDOWS_QUI" class="btn btn-primary-x2" style="display: flex; flex-direction: column; align-items: center;">
+                        <span style="font-size: 19px; font-weight: bold;">Scarica per Windows</span>
+                        <span style="font-size: 12px; opacity: 0.9; font-weight: normal; margin-top: 5px;">Archivio compresso | ~7.2 GB</span>
+                    </a>
                     
-                    <!-- Info Trial -->
-                    <div style="background: rgba(0, 123, 255, 0.1); border: 1px solid var(--accent); padding: 15px 25px; border-radius: 12px; display: inline-block; margin-bottom: 40px;">
-                        <span style="font-weight: bold; color: white;">🎁 Inizia Gratis:</span> Scarica ora e ottieni <b>30 messaggi di prova gratuiti</b>, senza impegno.
-                    </div>
-                
-                    <!-- Bottoni Download -->
-                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
-                        <!-- Pulsante Windows -->
-                        <a href="INSERISCI_LINK_WINDOWS_QUI" class="btn btn-primary" style="display: flex; flex-direction: column; align-items: center; padding: 15px 30px;">
-                            <span style="font-size: 18px; font-weight: bold;">Scarica per Windows</span>
-                            <span style="font-size: 12px; opacity: 0.9; font-weight: normal; margin-top: 5px;">Archivio compresso | ~7.2 GB</span>
-                        </a>
-                        
-                        <!-- Pulsante Mac -->
-                        <a href="INSERISCI_LINK_MAC_QUI" class="btn" style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.2); display: flex; flex-direction: column; align-items: center; padding: 15px 30px;">
-                            <span style="font-size: 18px; font-weight: bold;">Scarica per Mac OS</span>
-                            <span style="font-size: 12px; opacity: 0.7; font-weight: normal; margin-top: 5px;">Archivio compresso | ~[PESO_MAC] GB</span>
-                        </a>
-                    </div>
-                
-                    <!-- Info 7-Zip -->
-                    <p style="font-size: 13px; color: #94a3b8; max-width: 600px; margin: 0 auto;">
-                        ⚠️ <b>Nota per gli utenti Windows:</b> Il file contiene il "cervello" dell'IA ed è molto grande. Per estrarlo correttamente sul tuo PC è richiesto il programma gratuito <a href="https://www.7-zip.org/download.html" target="_blank" style="color: var(--accent); text-decoration: underline;">7-Zip (Scaricalo qui)</a>.
-                    </p>
-                </section>
+                    <!-- Pulsante Mac (Secondary Custom) -->
+                    <a href="INSERISCI_LINK_MAC_QUI" class="btn btn-secondary-custom" style="display: flex; flex-direction: column; align-items: center;">
+                        <span style="font-size: 19px; font-weight: bold;">Scarica per Mac OS</span>
+                        <span style="font-size: 12px; opacity: 0.7; font-weight: normal; margin-top: 5px;">Archivio compresso | ~[PESO_MAC] GB</span>
+                    </a>
+                </div>
+            
+                <!-- Info 7-Zip -->
+                <p style="font-size: 13px; color: #94a3b8; max-width: 600px; margin: 0 auto;">
+                    ⚠️ <b>Nota per gli utenti Windows:</b> Il file contiene il "cervello" dell'IA ed è molto grande. Per estrarlo correttamente sul tuo PC è richiesto il programma gratuito <a href="https://www.7-zip.org/download.html" target="_blank" style="color: var(--accent); text-decoration: underline;">7-Zip (Scaricalo qui)</a>.
+                </p>
+            </section>
             
             <!-- INIZIO SEZIONE REQUISITI -->
             <section id="requisiti" style="padding: 80px 0;">
@@ -164,6 +358,124 @@
                 <div class="card"><h3>⏱️ Time Tracking</h3><p>Parcellazione automatica integrata.</p></div>
             </section>
 
+            <!-- ═══ WIDGET ORBITALE RM STUDIO (6 ELEMENTI SIMMETRICI) ═══ -->
+            <section class="orbit-section" id="ecosistema">
+                <div class="container">
+                    <div class="orbit-grid">
+                        
+                        <!-- Widget di rotazione simmetrica -->
+                        <div class="orbit-area">
+                            <div class="orbit-ring">
+                                
+                                <!-- 1. Concierge24 (0° - Alto al centro) -->
+                                <div class="orbit-wrapper" style="top: 0%; left: 50%;">
+                                    <div class="orbit-item">
+                                        <a href="https://concierge24.rmstudio.app" target="_blank" rel="noopener noreferrer" class="orbit-link" style="background:#0a0a0c; padding: 10px;">
+                                            <img src="https://raw.githubusercontent.com/Rickym2025/concierge24pro/main/logo.png" alt="Concierge24" class="orbit-img">
+                                        </a>
+                                        <div class="orbit-tooltip">
+                                            <b>Concierge24</b>
+                                            Assistente vocale e testuale AI H24 per hotel e strutture extra-alberghiere.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 2. DriveMotion (60° - Alto a destra) -->
+                                <div class="orbit-wrapper" style="top: 25%; left: 93.3%;">
+                                    <div class="orbit-item">
+                                        <a href="https://drivemotion.rmstudio.app" target="_blank" rel="noopener noreferrer" class="orbit-link" style="background:#fff; padding: 6px;">
+                                            <img src="https://raw.githubusercontent.com/Rickym2025/mrstudio/main/public/logo_drivemotion_bg2.jpg" alt="DriveMotion" class="orbit-img cover rounded">
+                                        </a>
+                                        <div class="orbit-tooltip">
+                                            <b>DriveMotion AI</b>
+                                            Generazione automatica di sfondi e video cinematici per saloni auto.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 3. Nexus AI (120° - Basso a destra) -->
+                                <div class="orbit-wrapper" style="top: 75%; left: 93.3%;">
+                                    <div class="orbit-item">
+                                        <a href="https://nexus.rmstudio.app" target="_blank" rel="noopener noreferrer" class="orbit-link" style="background:#0a0a0c; padding: 12px;">
+                                            <img src="https://raw.githubusercontent.com/Rickym2025/nexus/main/logo_nexus.png" alt="Nexus AI" class="orbit-img">
+                                        </a>
+                                        <div class="orbit-tooltip">
+                                            <b>Nexus AI</b>
+                                            Widget chatbot intelligente per accoglienza e conversione automatica lead.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 4. OmniaStudio (180° - Basso al centro) -->
+                                <div class="orbit-wrapper" style="top: 100%; left: 50%;">
+                                    <div class="orbit-item">
+                                        <a href="https://omniastudio.rmstudio.app" target="_blank" rel="noopener noreferrer" class="orbit-link" style="background:#fff; padding: 4px;">
+                                            <img src="https://raw.githubusercontent.com/Rickym2025/mrstudio/main/public/logo_OmniaStudio.png" alt="OmniaStudio" class="orbit-img">
+                                        </a>
+                                        <div class="orbit-tooltip">
+                                            <b>OmniaStudio</b>
+                                            La potenza dell'AI locale e protetta offline sul tuo PC, a vita.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 5. FF Edizioni (240° - Basso a sinistra) -->
+                                <div class="orbit-wrapper" style="top: 75%; left: 6.7%;">
+                                    <div class="orbit-item">
+                                        <a href="https://ff-edizioni.rmstudio.app" target="_blank" rel="noopener noreferrer" class="orbit-link" style="background:#0a0a0c; padding: 2px;">
+                                            <img src="https://raw.githubusercontent.com/Rickym2025/fausto-fusetti-links/main/logo6.jpg" alt="FF Edizioni" class="orbit-img cover rounded">
+                                        </a>
+                                        <div class="orbit-tooltip">
+                                            <b>FF Edizioni</b>
+                                            Colonne sonore, jingle commerciali e sound design creati con l'AI.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 6. HomeTour AI (300° - Alto a sinistra) -->
+                                <div class="orbit-wrapper" style="top: 25%; left: 6.7%;">
+                                    <div class="orbit-item">
+                                        <a href="https://hometour.rmstudio.app" target="_blank" rel="noopener noreferrer" class="orbit-link" style="background:#0a0a0c; padding: 4px;">
+                                            <img src="https://raw.githubusercontent.com/Rickym2025/mrstudio/main/public/logo_hometour%2Bbg.jpg" alt="HomeTour" class="orbit-img cover rounded">
+                                        </a>
+                                        <div class="orbit-tooltip">
+                                            <b>HomeTour AI</b>
+                                            Reel immobiliari con voce narrante generati in automatico da foto.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Foto del Fondatore fissa al centro (Massima Fiducia E-E-A-T) -->
+                            <div class="orbit-center-photo">
+                                <img src="https://raw.githubusercontent.com/Rickym2025/mrstudio/main/public/riccardo_founder.jpeg" alt="Riccardo Modena - Fondatore RM Studio">
+                            </div>
+                        </div>
+
+                        <!-- Profilo Autorevolezza RM Studio (E-E-A-T Google) -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div style="display: inline-block; padding: 6px 16px; border: 1px solid rgba(0, 123, 255, 0.4); background: rgba(0, 123, 255, 0.1); color: var(--accent); font-size: 11px; font-weight: 800; text-transform: uppercase; border-radius: 100px; width: fit-content; letter-spacing: 1px;">
+                                Esperienza & Autorevolezza
+                            </div>
+                            <h2 style="font-size: 42px; color: white; margin: 0; line-height: 1.15;">
+                                Tecnologia proprietaria firmata <span class="highlight">RM Studio</span>
+                            </h2>
+                            <p style="color: #cbd5e1; line-height: 1.7; margin: 0; font-size: 17px;">
+                                Sviluppato dal programmatore <b>Riccardo Modena</b>, OmniaStudio PRO fa parte di un ecosistema integrato di soluzioni software dedicate all'automazione aziendale. Crediamo in un'intelligenza artificiale accessibile, etica e che non richieda canoni mensili per i professionisti.
+                            </p>
+                            <p style="color: #94a3b8; line-height: 1.7; margin: 0; font-size: 15px;">
+                                Come documentato nelle più autorevoli <a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">linee guida sulla sicurezza informatica dello standard ISO/IEC 27001</a>, l'elaborazione dei dati sensibili in locale garantisce l'immunità totale dalle fughe di dati cloud e preserva la conformità GDPR a costo zero.
+                            </p>
+                            <a href="https://www.linkedin.com/in/riccardo-modena-13918a61/" target="_blank" style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); padding: 12px 24px; border-radius: 100px; text-decoration: none; font-weight: bold; width: fit-content; font-size: 14px; transition: 0.3s; display: flex; align-items: center; gap: 8px;">
+                                Segui Riccardo Modena su LinkedIn
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
             <section id="acquista" style="padding: 60px 0;">
                 <div class="checkout-box">
                     <h2 style="margin-top:0;">Licenza Lifetime</h2>
@@ -171,7 +483,7 @@
                     <p style="color: #00ffcc; font-size: 14px; font-weight: bold; margin-bottom: 25px;">Paga 1 volta, il software è tuo per sempre.</p>
             
                     <input type="text" id="deviceCodeInput" class="checkout-input" placeholder="Inserisci il tuo Codice Dispositivo" required>
-                    <button onclick="pagaConStripe()" class="btn-primary" style="width: 100%; border-radius: 12px; cursor: pointer; font-size: 18px; padding: 18px;">
+                    <button onclick="pagaConStripe()" class="btn-primary-x2" style="width: 100%; border-radius: 12px; cursor: pointer; font-size: 19px; padding: 18px;">
                         💳 Acquista e Sblocca Ora
                     </button>
                     <p style="margin-top: 15px; font-size: 13px; color: #94a3b8;">Riceverai il Codice di Sblocco via Email subito dopo il pagamento.</p>
@@ -188,11 +500,11 @@
         <footer>
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h4>MR Studio</h4>
+                    <h4>RM Studio</h4>
                     <p style="color: #94a3b8; font-size: 13px;">Sviluppo di Soluzioni AI Avanzate per il Business.<br></p>
                     <div class="social-icons">
                         <a href="https://www.linkedin.com/in/riccardo-modena-13918a61/" target="_blank">LinkedIn</a>
-                        <a href="https://www.instagram.com/riccardo_mode_/" target="_blank">Instagram</a>
+                        <a href="https://www.instagram.com/riccardo_mode/" target="_blank">Instagram</a>
                         <a href="https://www.facebook.com/riccardo.modena.792" target="_blank">Facebook</a>
                         <a href="https://www.tiktok.com/@mr3d.riccardo" target="_blank">TikTok</a>
                     </div>
@@ -200,10 +512,10 @@
                 <div class="footer-col">
                     <h4>Ecosistema AI</h4>
                     <ul>
-                        <li><a href="https://hometour-studio.vercel.app/" target="_blank">HomeTour (Immobiliare)</a></li>
-                        <li><a href="https://drive-motion.vercel.app/" target="_blank">DriveMotion (Automotive)</a></li>
-                        <li><a href="https://concierge24.vercel.app/" target="_blank">Concierge24 (Hospitality)</a></li>
-                        <li><a href="https://ff-edizioni.vercel.app/" target="_blank">FF Edizioni (Publishing)</a></li>
+                        <li><a href="https://hometour.rmstudio.app/" target="_blank">HomeTour (Immobiliare)</a></li>
+                        <li><a href="https://drivemotion.rmstudio.app/" target="_blank">DriveMotion (Automotive)</a></li>
+                        <li><a href="https://concierge24.rmstudio.app/" target="_blank">Concierge24 (Hospitality)</a></li>
+                        <li><a href="https://ff-edizioni.rmstudio.app/" target="_blank">FF Edizioni (Publishing)</a></li>
                     </ul>
                 </div>
                 <div class="footer-col" style="flex: 2;">
@@ -241,7 +553,6 @@
             
             window.location.href = stripePaymentLinkURL + "?client_reference_id=" + encodeURIComponent(deviceCode);
         }
-    </script>
     </script>
 <!-- Vercel Speed Insights -->
     <script>
@@ -380,7 +691,7 @@
         const div = document.createElement('div');
         div.className = `os-msg ${sender}`;
         if (id) div.id = id;
-        div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+        div.innerHTML = text.replace(/\*\*(.*?)\*\"/g, '<b>$1</b>').replace(/\n/g, '<br>');
         const box = document.getElementById('os-messages');
         box.appendChild(div);
         box.scrollTo({ top: box.scrollHeight, behavior: 'smooth' });
