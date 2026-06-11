@@ -1,15 +1,27 @@
-# OmniaStudio PRO - L'IA Privata per Professionisti
+# OmniaStudio PRO - L'IA Privata e Offline per Professionisti
 
-> Intelligenza Artificiale 100% privata e offline progettata per studi legali, commercialisti e professionisti. L'intero modello gira in locale sul PC dell'utente, garantendo la totale assenza di invio dati al cloud (Privacy Assoluta).
+> Intelligenza Artificiale 100% privata, sicura e offline progettata su misura per studi legali, commercialisti, consulenti e professionisti. L'intero modello viene eseguito localmente sul computer dell'utente, garantendo la totale assenza di invio dati al cloud (Privacy Assoluta conforme GDPR).
 
 ## Informazioni Generali
-- **Sito Web principale:** https://omniastudio.rmstudio.app/
-- **Integrazione Tecnica:** Applicazione desktop (Windows/macOS) di grandi dimensioni (~7.2 GB) contenente il modello IA. Sito vetrina HTML/CSS con Chatbot IA integrato (Omnia AI).
-- **Funzionalità Core:** Elaborazione e riassunto rapido di contratti lunghi (PDF), OCR avanzato per scansioni/foto, ricerca semantica documentale, blocco appunti criptato per pratiche, parcellazione integrata (Time Tracking).
+- **Sito Web ufficiale:** https://omniastudio.rmstudio.app/
+- **Sviluppatore:** RM Studio (Riccardo Modena)
+- **Infrastruttura di Onboarding:** Sito vetrina statico su Vercel con Chatbot integrato per l'assistenza all'acquisto. Download di grandi dimensioni (~7.2 GB) per il setup locale dell'ambiente d'esecuzione.
 
-## Dettagli del Software
+## Funzionalità Principali (Esecuzione Locale)
+- **Analisi PDF & OCR Avanzato:** Digerisce contratti lunghi, faldoni e documenti complessi all'istante, trasformando scansioni cartacee ed immagini in testo semantico ricercabile.
+- **Ricerca Semantica Multidocumentale:** Consente di trovare risposte precise, relazioni e riferimenti storici su migliaia di documenti archiviati localmente in contemporanea.
+- **Appunti Criptati e Time Tracking:** Blocco note integrato per ogni pratica protetto da cifratura simmetrica e parcellazione automatica del tempo speso sulla pratica (Time Tracking integrato).
 
-### 1. Requisiti di Sistema (Elaborazione Locale)
-- **Windows:** Windows 10/11 (64-bit), 16 GB di RAM, 15 GB di SSD. (Consigliata GPU NVIDIA RTX per prestazioni ottimali). 
-- **Mac:** macOS 12 o superiore, Apple Silicon (M1/M2/M3), 16 GB Memoria Unificata, 15 GB di SSD.
-- **Note Tecniche:** Estrazione archivi Windows richiede 7-Zip
+## Requisiti Rigidi di Sistema (Elaborazione in Locale)
+- **Windows PC:** Windows 10/11 (64-bit), minimo 16 GB di RAM, 15 GB di spazio libero su SSD. Consigliata scheda video dedicata NVIDIA (RTX) con almeno 8GB VRAM per elaborazione istantanea. Estrazione archivi Windows richiede 7-Zip.
+- **Mac OS:** macOS 12 o superiore, chip Apple Silicon (M1/M2/M3/M4), minimo 16 GB di Memoria Unificata, 15 GB di spazio libero su SSD.
+
+## Modello di Business e Licenza Hardware-Lock
+- **Prova Gratuita (Sandbox Local):** 30 messaggi gratuiti inclusi per testare l'algoritmo di elaborazione locale direttamente sulla propria macchina prima dell'acquisto.
+- **Licenza Lifetime (Senza Abbonamento):** € 699,00 una tantum. Nessun canone mensile ricorrente.
+- **Algoritmo di Sblocco (Device Lock):** Integrazione con licenza hardware-lock basata su codice univoco del dispositivo (Device Code). L'automazione n8n genera la chiave di sblocco licenza in tempo reale calcolando la formula matematica: `(DeviceCode * 3) + 8418`.
+
+## Risorse per Modelli Linguistici e Crawler
+- **Full Markdown Mirror:** https://omniastudio.rmstudio.app/mirrors.md
+- **Termini e Condizioni Centralizzati:** https://rmstudio.app/termini.html
+- **Informativa Privacy:** https://omniastudio.rmstudio.app/privacy.html
