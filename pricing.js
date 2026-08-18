@@ -2,25 +2,45 @@
  * OmniaStudio PRO - Live Pricing & Stripe On-The-Fly Checkout
  * RM Studio Universal Engine
  */
+
+const SUPABASE_S2_URL = 'https://jhijfulhntlhcytbhcly.supabase.co';
+const SUPABASE_S2_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpoaWpmdWxobnRsaGN5dGJoY2x5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3MzcxODcsImV4cCI6MjA5ODMxMzE4N30.z062NW4ApClll-XWHH2ufmcCleBRNHUUdKO6FiLa0TQ';
+
+// 1. Prezzo di Fallback Immediato (Zero Flicker)
 let OMNIA_PRICE = 699;
 
+// 2. Render Reattivo del DOM
+function renderOmniaPrice() {
+  const el = document.getElementById("price-display");
+  if (el) {
+    el.innerText = `€ ${OMNIA_PRICE.toFixed(2).replace('.', ',')}`;
+  }
+}
+
+// 3. Fetch Live da Supabase S2 (Tabella saas_pricing)
 async function initOmniaPricing() {
   try {
-    const res = await fetch("https://zqkqlhosyjvxdwfjmwwb.supabase.co/rest/v1/saas_pricing?saas=eq.omniastudio&select=*");
+    const res = await fetch(`${SUPABASE_S2_URL}/rest/v1/saas_pricing?saas=eq.omniastudio&plan_id=eq.lifetime&select=*`, {
+      headers: {
+        'apikey': SUPABASE_S2_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_S2_ANON_KEY}`
+      },
+      cache: 'no-store'
+    });
+
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data) && data.length > 0 && data[0].price) {
         OMNIA_PRICE = Number(data[0].price);
+        renderOmniaPrice();
       }
     }
   } catch (e) {
-    console.warn("Prezzi locali OmniaStudio:", e);
+    console.warn("Utilizzo prezzo locale fallback OmniaStudio:", e);
   }
-
-  const el = document.getElementById("price-display");
-  if (el) el.innerText = `€ ${OMNIA_PRICE.toFixed(2).replace('.', ',')}`;
 }
 
+// 4. Avvio Checkout Stripe On-The-Fly via n8n
 async function pagaConStripe() {
   const input = document.getElementById('deviceCodeInput');
   const deviceCode = input ? input.value.trim() : '';
@@ -80,4 +100,7 @@ async function pagaConStripe() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", initOmniaPricing);
+document.addEventListener("DOMContentLoaded", () => {
+  renderOmniaPrice();
+  initOmniaPricing();
+});
