@@ -9,8 +9,12 @@ localStorage.setItem('os_chat_session', chatSessionId);
 let chatIsOpen = window.innerWidth > 900; 
 
 function injectChatbot() {
-  const container = document.getElementById('chatbot-container');
-  if (!container) return;
+  let container = document.getElementById('chatbot-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'chatbot-container';
+    document.body.appendChild(container);
+  }
 
   container.innerHTML = `
     <style>
